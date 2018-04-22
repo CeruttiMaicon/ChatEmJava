@@ -16,29 +16,24 @@ public class Chat extends javax.swing.JFrame {
     private BufferedReader br;
     private InputStreamReader isr;
    
-    
-
-
-    //Contrutor
+    //metodo construtor
     public Chat(String name) {
         
+        //inicializa os componentes do Swing
         initComponents();
         
-       
+        //atribuição do nome para o Cliente
         this.name = name;
         
         try{
             socket = new Socket("localhost",5000);
         }catch(IOException e){
-            //faz a conexã com o servidor
+            //faz a conexão com o servidor
             showMessageDialog(null, "Não se conectou com o servidor","",ERROR_MESSAGE);
             //fecha a conexão caso ele nao conecte
             System.exit(0);
         }
-        
         Thread();
-        
-        
     }
     // A thread que vai recever as mensagens
     private void Thread(){
@@ -55,7 +50,6 @@ public class Chat extends javax.swing.JFrame {
                      br = new BufferedReader(isr);
                      
                      while ((mensagem = br.readLine()) != null) {
-                         
                          mensagemRecebida.setText(mensagemRecebida.getText() + mensagem + "\n");
                         
                      }
@@ -65,10 +59,9 @@ public class Chat extends javax.swing.JFrame {
             }
         });
         //inicia a thread
-        tread.start();
-        
+        tread.start();  
     }
-
+    //Inicializa o Swing - Código feito pelo NetBeans
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -137,8 +130,11 @@ public class Chat extends javax.swing.JFrame {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addGap(20, 20, 20)))
                         .addGap(42, 42, 42))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -149,12 +145,12 @@ public class Chat extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel3)))
+                .addContainerGap(36, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -169,7 +165,7 @@ public class Chat extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //Parte final Swing - Código feito pelo NetBeans
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //Mensagem aparecendo no cliente
         
@@ -177,6 +173,7 @@ public class Chat extends javax.swing.JFrame {
             String mensagem = name + " escreveu: ";
             PrintStream ps = new PrintStream(socket.getOutputStream());
             //manda a mensagem para o campo TEXT superior
+            //Pega o nome e a palavra ' escreveu: ' e atribui a mensagem digitada pelo Cliente
             mensagem += mensagemEnviada.getText();
             
             ps.println(mensagem);
@@ -193,13 +190,15 @@ public class Chat extends javax.swing.JFrame {
 
     private void mensagemEnviadaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mensagemEnviadaKeyPressed
         
-        
+        //Foi necessario duplicar está parte pois eu quis fazer o chat
+        //enviar mensagens apenas precisonando ENTER
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
                 
             try{
                 String mensagem = name + " escreveu: ";
                 PrintStream ps = new PrintStream(socket.getOutputStream());
                 //manda a mensagem para o campo TEXT superior
+                //Pega o nome e a palavra ' escreveu: ' e atribui a mensagem digitada pelo Cliente
                 mensagem += mensagemEnviada.getText();
 
                 ps.println(mensagem);
@@ -221,7 +220,7 @@ public class Chat extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
-
+// Swing feito pelo NetBeans
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
